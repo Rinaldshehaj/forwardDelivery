@@ -2,26 +2,27 @@
 
 @section('content')
     <div class="pb-4">
-        <form class="container" name="calculator_form" id="calculator_form" method="POST" action="{{ route('calculate') }}" enctype="multipart/form-data">
-        @csrf
-            <div class="d-flex">
-                <div class="d-flex justify-content-around">
-                    <div class="d-flex flex-column">
-                        <label class="form-label">From</label>
-                        <select class="form-control" name="fromCountry" id="fromCountry">
-                            @foreach($countries as $country)
-                                <option value="{{ $country->name  }}"> {{ $country->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="d-flex flex-column">
-                        <label class="form-label">To</label>
-                        <select class="form-control" name="toCountry" id="toCountry">
-                            @include('partials.countries_select_options')
-                        </select>
-                    </div>
+        <form class="container d-flex justify-content-around flex-wrap" name="calculator_form" id="calculator_form"
+              method="POST"
+              action="{{ route('calculate') }}" enctype="multipart/form-data">
+            @csrf
+            <div class="d-flex align-self-center">
+                <div class="d-flex flex-column">
+                    <label class="form-label">From</label>
+                    <select class="form-control" name="fromCountry" id="fromCountry">
+                        @foreach($countries as $country)
+                            <option value="{{ $country->name  }}"> {{ $country->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="d-flex flex-column">
+                    <label class="form-label">To</label>
+                    <select class="form-control" name="toCountry" id="toCountry">
+                        @include('partials.countries_select_options')
+                    </select>
                 </div>
             </div>
+            <div class="d-flex align-self-center flex-column">
                 <div class="d-flex justify-content-around">
                     <div class="d-flex flex-column">
                         <label class="form-label">Length</label>
@@ -32,15 +33,21 @@
                         <input class="form-control" type="text" name="height">
                     </div>
                 </div>
+                <div class="d-flex justify-content-around">
+                    <div class="d-flex flex-column">
+                        <label class="form-label">Width</label>
+                        <input class="form-control" type="text" name="width">
+                    </div>
+                    <div class="d-flex flex-column">
+                        <label class="form-label">Weight</label>
+                        <input class="form-control" type="text" name="weight">
+                    </div>
+                </div>
+                <div class="pt-5">
+                    <input type="submit" value="Calculate" class="btn btn-primary calculate__js">
+                </div>
             </div>
-        <div>
-            <label class="form-label">Width</label>
-            <input class="form-control" type="text" name="width">
-            <label class="form-label">Weight</label>
-            <input class="form-control" type="text" name="weight">
-        </div>
-        <input type="submit" value="Calculate" class="btn btn-primary calculate__js">
-    </form>
+        </form>
     </div>
     <div class="container">
         <table class="table d-none" name="rates_table" id="rates_table">

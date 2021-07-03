@@ -71,7 +71,6 @@ class CalculatorController extends Controller
 
             $rates_from_api = Shipment::retrieve($shipment_id);
             $rates_arr = $rates_from_api->get_rates()->rates;
-
             $rates = [];
             foreach ($rates_arr as $rate) {
                 $rates[] = [
@@ -82,7 +81,6 @@ class CalculatorController extends Controller
                 ];
             }
         }
-        dd($rates);
         return response()->json(compact('rates'));
     }
 }

@@ -49881,7 +49881,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 // @todo add validation
 $('#calculator_form').submit(function (event) {
   event.preventDefault();
-  console.log(app_domain);
   var data = {
     fromCountry: $('#fromCountry').val(),
     toCountry: $('#toCountry').val(),
