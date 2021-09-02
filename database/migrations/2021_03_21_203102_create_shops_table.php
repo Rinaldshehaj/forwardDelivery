@@ -19,8 +19,10 @@ class CreateShopsTable extends Migration
             $table->string('logo', 100);
             $table->string('logo_path', 100);
             $table->string('link');
-            $table->foreign('country_id')->on('countries')->onDelete('cascade');
+            $table->unsignedBigInteger('country_id');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
