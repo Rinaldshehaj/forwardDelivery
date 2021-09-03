@@ -13,11 +13,6 @@ class User extends Authenticatable
     use HasRoleAndPermission;
 
     /**
-     * user type
-     */
-    const USER_TYPE = 'user';
-
-    /**
      * The attributes that are mass assignable.
      * @todo Remove type from database
      * @var array
@@ -46,13 +41,5 @@ class User extends Authenticatable
 
     public function userAddress() {
         return $this->hasOne(UserAddress::class);
-    }
-
-    /**
-     * @return string
-     * return only User type
-     */
-    public static function getUserType() {
-        return self::USER_TYPE;
     }
 }

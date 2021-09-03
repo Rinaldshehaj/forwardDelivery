@@ -69,9 +69,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
-
-        $role = config('roles.models.role')::where('name', '=', 'User')->first();  //choose the default role upon user creation.
+        ]);//choose the default role upon user creation.
+        $role = config('roles.models.role')::where('name', '=', 'User')->first();
         $user->attachRole($role);
 
         return $user;
