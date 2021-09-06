@@ -39,6 +39,12 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function isAdmin(): bool
+    {
+        $roles = $this->roles()->get()->toArray();
+        return $roles[0]['name'] === 'Admin';
+    }
+
     public function userAddress() {
         return $this->hasOne(UserAddress::class);
     }
