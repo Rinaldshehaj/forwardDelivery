@@ -3,7 +3,7 @@
 @section('content')
     <div class="container d-flex flex-wrap">
         @foreach($carrier_account as $carrier)
-            <div class="col-4">
+            <div class="col-12 col-lg-4">
                 <div class="col-12">
                     <div class="card">
                         <div class="align-content-center card-body d-flex flex-column">

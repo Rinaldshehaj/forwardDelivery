@@ -17,22 +17,16 @@ use Illuminate\View\View;
 class UserAddressController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
-     * @return Application|Factory|Response|View
+     * @return Application|Factory|\Illuminate\Http\RedirectResponse|View
      */
     public function create()
     {
+        $user_address = Auth::user()->userAddress()->get()->toArray();
+        if (!empty($user_address)) {
+            return redirect()->route('profile');
+        }
         return view('userAddress.create');
     }
 
@@ -40,21 +34,21 @@ class UserAddressController extends Controller
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
      */
-    public function store(Request $request): Response {
+    public function store(Request $request)
+    {
         $user_id = Auth::id();
         $user = User::find($user_id);
         $address = new UserAddress();
         $address->fill($request->all());
         $user->userAddress()->save($address);
-        return response()->view('home');
+        return redirect()->route('profile');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function show($id)
@@ -65,14 +59,14 @@ class UserAddressController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return Response
+     * @param int $id
+     * @return Application|Factory|View
      */
     public function edit($id)
     {
         $user_address = DB::table('user_addresses')
             ->select()
-            ->where('user_id', '=', $id)->first();
+            ->where('id', '=', $id)->first();
         return \view('userAddress.edit', compact('user_address'));
     }
 
@@ -80,7 +74,7 @@ class UserAddressController extends Controller
      * Update the specified resource in storage.
      *
      * @param Request $request
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function update(Request $request, $id)
@@ -94,7 +88,7 @@ class UserAddressController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return Response
      */
     public function destroy($id)

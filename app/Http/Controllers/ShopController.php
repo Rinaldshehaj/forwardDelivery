@@ -99,7 +99,7 @@ class ShopController extends Controller
             $shop->logo_path = '/storage/' . $path;
         }
         $shop->update();
-        return response()->view('home');
+        return redirect()->route('shops');
     }
 
     /**
@@ -111,5 +111,11 @@ class ShopController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function shops()
+    {
+        $shops = Shop::all();
+        return view('shop.shops', compact('shops'));
     }
 }

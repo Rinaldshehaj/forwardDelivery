@@ -8,7 +8,7 @@
     </div>
     <div class="d-flex flex-wrap">
         @foreach($addresses as $address)
-            <div class="col-4">
+            <div class="col-12 col-lg-4">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body text-center">

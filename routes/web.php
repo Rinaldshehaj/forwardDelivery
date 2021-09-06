@@ -22,13 +22,6 @@ Auth::routes();
 Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/admin', 'AdminController@index')->name('admin');
 
-    /*User Address routes*/
-    Route::get('/admin/address/create', 'UserAddressController@create')->name('createAddress');
-    Route::post('/admin/address/store', 'UserAddressController@store')->name('storeAddress');
-    Route::get('/admin/address/{id}', 'UserAddressController@show')->name('address');
-    Route::get('/address/edit/{id}', 'UserAddressController@edit')->name('editAddress');
-    Route::post('/admin/address/update/{id}', 'UserAddressController@update')->name('updateAddress');
-
     /*Country Address routes*/
     Route::get('/admin/c-address/index', 'AddressController@index')->name('country');
     Route::get('/admin/c-address/create', 'AddressController@create')->name('createCountryAddress');
@@ -55,6 +48,15 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/admin/carrier/store', 'CarrierController@store')->name('storeCarriers');
 });
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/profile', 'ProfileController@index')->name('profile');
+    Route::get('/shops', 'ShopController@shops')->name('f_shops');
+
+    /*User Address routes*/
+    Route::get('/address/create', 'UserAddressController@create')->name('createAddress');
+    Route::post('/address/store', 'UserAddressController@store')->name('storeAddress');
+    Route::get('/address/{id}', 'UserAddressController@show')->name('address');
+    Route::get('/address/edit/{id}', 'UserAddressController@edit')->name('editAddress');
+    Route::post('/address/update/{id}', 'UserAddressController@update')->name('updateAddress');
 
     /* User routes */
     Route::get('/settings', 'UserController@settings')->name('userSettings');

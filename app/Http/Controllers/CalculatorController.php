@@ -6,6 +6,7 @@ use App\Address;
 use App\Country;
 use EasyPost\Shipment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Psy\Util\Json;
 
 class CalculatorController extends Controller
@@ -15,7 +16,12 @@ class CalculatorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
+        $user_address = Auth::user()->userAddress()->get()->toArray();
+        if (empty($user_address)) {
+            return redirect()->route('createAddress');
+        }
         $countries = Country::all();
         return view('calculator.index', compact('countries'));
     }
@@ -25,18 +31,19 @@ class CalculatorController extends Controller
      * Calculate rates based on destinations
      * @author Rinald Shehaj
      */
-    public function calculate(Request $request) {
-        if($request->isXmlHttpRequest()) {
+    public function calculate(Request $request)
+    {
+        if ($request->isXmlHttpRequest()) {
             $data = $request->all();
             $to_address = \EasyPost\Address::create(
                 array(
-                    "name"    => "",
+                    "name" => "",
                     "street1" => "",
-                    "city"    => "",
-                    "state"   => $data['toCountry'],
-                    "country"   => $data['toCountry'],
-                    "zip"     => "90277",
-                    "phone"   => ""
+                    "city" => "",
+                    "state" => $data['toCountry'],
+                    "country" => $data['toCountry'],
+                    "zip" => "90277",
+                    "phone" => ""
                 )
             );
             $from_address = \EasyPost\Address::create(
@@ -44,11 +51,11 @@ class CalculatorController extends Controller
                     "company" => "",
                     "street1" => "",
                     "street2" => "",
-                    "city"    => "",
-                    "state"   => $data['fromCountry'],
-                    "country"   => $data['fromCountry'],
-                    "zip"     => "94105",
-                    "phone"   => ""
+                    "city" => "",
+                    "state" => $data['fromCountry'],
+                    "country" => $data['fromCountry'],
+                    "zip" => "94105",
+                    "phone" => ""
                 )
             );
             $parcel = \EasyPost\Parcel::create(
@@ -61,9 +68,9 @@ class CalculatorController extends Controller
             );
             $shipment = \EasyPost\Shipment::create(
                 array(
-                    "to_address"   => $to_address,
+                    "to_address" => $to_address,
                     "from_address" => $from_address,
-                    "parcel"       => $parcel
+                    "parcel" => $parcel
                 )
             );
 
