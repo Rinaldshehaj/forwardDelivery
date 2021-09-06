@@ -22,7 +22,7 @@ class CreateAddressesTable extends Migration
             $table->string('phone');
             $table->unsignedBigInteger('country_id');
             $table->foreign('country_id')->references('id')->on('countries')
-                ->onDelete(null);
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }

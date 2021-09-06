@@ -110,7 +110,9 @@ class ShopController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $shop = Shop::find($id);
+        $shop->delete();
+        return redirect()->route('shops');
     }
 
     public function shops()

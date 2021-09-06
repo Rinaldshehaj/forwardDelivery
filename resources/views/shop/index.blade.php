@@ -19,8 +19,19 @@
                             <h5 class="text-center mt-1 mb-1">
                                 {{ $shop->shop_name }}
                             </h5>
-                            <a href="{{ route('editShop', $shop->id) }}" class="btn btn-warning">Modify</a>
-
+                            <div class="d-flex justify-content-around">
+                                <a href="{{ route('editShop', $shop->id) }}" class="btn btn-warning">Modify</a>
+                                <form type="submit"
+                                      method="POST"
+                                      action="{{ route('deleteShop', ['id' => $shop->id]) }}">
+                                    @csrf
+                                    <button onclick="return confirm('Are you sure you want to delete?')"
+                                            class="btn btn-danger"
+                                            type="submit">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

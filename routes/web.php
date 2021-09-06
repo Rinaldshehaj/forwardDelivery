@@ -29,11 +29,13 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('/admin/c-address/{id}', 'AddressController@show')->name('CountryAddress');
     Route::get('/admin/c-address/edit/{id}', 'AddressController@edit')->name('editCountryAddress');
     Route::post('/admin/c-address/update/{id}', 'AddressController@update')->name('updateCountryAddress');
+    Route::post('/admin/c-address/delete/{id}', 'AddressController@destroy')->name('deleteCountryAddress');
 
     /*Country routes*/
     Route::get('/admin/country', 'CountriesController@index')->name('countries');
     Route::get('/admin/country/create', 'CountriesController@create')->name('createCountry');
     Route::post('/admin/country/store', 'CountriesController@store')->name('storeCountry');
+    Route::post('/admin/country/delete/{id}', 'CountriesController@destroy')->name('deleteCountry');
 
     /* Shop routes */
     Route::get('/admin/shop/index', 'ShopController@index')->name('shops');
@@ -41,6 +43,7 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::post('/admin/shop/store', 'ShopController@store')->name('storeShops');
     Route::get('/admin/shop/edit/{id}', 'ShopController@edit')->name('editShop');
     Route::post('/admin/shop/update/{id}', 'ShopController@update')->name('updateShop');
+    Route::post('/admin/shop/delete/{id}', 'ShopController@destroy')->name('deleteShop');
 
     /*Carrier Routes*/
     Route::get('/admin/carrier/index', 'CarrierController@index')->name('carriers');

@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Country Addresses')
 
 @section('content')
     <div class="mb-4">
@@ -19,7 +19,20 @@
                             <h2>State : {{ $address->state }}</h2>
                             <h2>Zip : {{ $address->zip }}</h2>
                             <h2>Phone : {{ $address->phone }}</h2>
-                            <a href="{{ route('editCountryAddress', $address->id) }}" class="btn btn-warning">Modify</a>
+                            <div class="d-flex justify-content-around">
+                                <a href="{{ route('editCountryAddress', $address->id) }}"
+                                   class="btn btn-warning">Modify</a>
+                                <form type="submit"
+                                      method="POST"
+                                      action="{{ route('deleteCountryAddress', ['id' => $address->id]) }}">
+                                    @csrf
+                                    <button onclick="return confirm('Are you sure you want to delete?')"
+                                            class="btn btn-danger"
+                                            type="submit">
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
