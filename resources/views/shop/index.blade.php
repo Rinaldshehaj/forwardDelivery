@@ -1,19 +1,30 @@
 @extends('adminlte::page')
 
-@section('title', 'AdminLTE')
+@section('title', 'Shops')
 
 @section('content')
-    <a href="{{ route('createShops') }}">+ Create new shop</a>
-    @foreach($shops as $shop)
-        <div>
-            <a href="{{ $shop->link }}">
-                <img src="{{ $shop->logo_path }}" alt="Shop logo" style="height: 250px; width: 250px;">
-            </a>
-        </div>
-        <p>
-            {{ $shop->shop_name }}
-        </p>
-        <a href="{{ route('editShop', $shop->id) }}" class="btn btn-warning">Modify</a>
-        <br>
-    @endforeach
+
+    <div class="mb-4">
+        <a href="{{ route('createShops') }}" class="btn btn-primary">Create new shop</a>
+    </div>
+    <div class="container d-flex flex-wrap">
+        @foreach($shops as $shop)
+            <div class="col-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="align-content-center card-body d-flex flex-column">
+                            <a href="{{ $shop->link }}">
+                                <img src="{{ $shop->logo_path }}" alt="Shop logo" class="w-100 h-100">
+                            </a>
+                            <h5 class="text-center mt-1 mb-1">
+                                {{ $shop->shop_name }}
+                            </h5>
+                            <a href="{{ route('editShop', $shop->id) }}" class="btn btn-warning">Modify</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endforeach
+    </div>
 @stop

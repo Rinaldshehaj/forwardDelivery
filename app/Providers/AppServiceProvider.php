@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        \EasyPost\EasyPost::setApiKey(env('EASYPOST_KEY'));
+        \EasyPost\EasyPost::setApiKey(env('EASYPOST'));
     }
 }

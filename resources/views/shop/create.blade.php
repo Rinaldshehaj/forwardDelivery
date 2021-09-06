@@ -5,12 +5,21 @@
 @section('content')
     <form action="{{ route('storeShops') }}" method="POST" enctype="multipart/form-data">
         @csrf
-        <label>Shop name</label>
-        <input type="text" name="shop_name">
-        <label>Shop logo</label>
-        <input type="file" name="logo">
-        <label>Link of the shop</label>
-        <input type="text" name="link">
-        <input type="submit" value="Save" class="btn btn-primary">
+        <div class="form-group p-5">
+            <label class="form-label">Shop name</label>
+            <input type="text" class="form-control" name="shop_name">
+            <label class="form-label">Shop logo</label>
+            <input type="file" class="form-control" name="logo" required>
+            <label class="form-label">Slug</label>
+            <input type="text" class="form-control" name="link">
+            <label class="form-label">Country</label>
+            <select class="form-control" name="country" id="country" required>
+                <option>Select country</option>
+                @foreach($countries as $country)
+                    <option value="{{ $country->id  }}"> {{ $country->name }}</option>
+                @endforeach
+            </select>
+            <input type="submit" value="Save" class="btn btn-primary mt-4">
+        </div>
     </form>
 @stop

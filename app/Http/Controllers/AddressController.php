@@ -47,7 +47,7 @@ class AddressController extends Controller
         $address = new Address();
         $address->fill($request->all());
         $country->address()->save($address);
-        return \response()->view('home');
+        return redirect()->route('country');
     }
 
     /**
@@ -88,7 +88,7 @@ class AddressController extends Controller
         $data = $request->all();
         $address = Address::find($id);
         $address->update($data);
-        return \response()->view('home');
+        return redirect()->route('country');
     }
 
     /**

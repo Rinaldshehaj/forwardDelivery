@@ -45,13 +45,15 @@ class ShopController extends Controller
         $shop = new Shop();
         $shop->shop_name = $request->input('shop_name');
         $shop->logo = $request->file('logo')->getClientOriginalName();
-        $shop->link = Name();
-        'https://' . $request->input('link');
+        $shop->link = 'https://' . $request->input('link');
         $imagePath = $request->file('logo');
         $imageName = $imagePath->getClientOriginalName();
         $path = $request->file('logo')->storeAs('/shop_logos', $imageName, 'public');
         $shop->logo_path = '/storage/' . $path;
+        $shop->country_id = $request->input('country');
         $shop->save();
+
+        return redirect()->route('shops');
     }
 
     /**

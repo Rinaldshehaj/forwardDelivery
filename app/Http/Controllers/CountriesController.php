@@ -39,7 +39,7 @@ class CountriesController extends Controller
         $country = new Country();
         $country->fill($request->all());
         $country->save();
-        return response()->view('home');
+        return redirect()->route('countries');
     }
 
     /**
