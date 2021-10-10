@@ -64,7 +64,7 @@
         </form>
     </div>
     <div class="container">
-        <table class="table d-none" name="rates_table" id="rates_table">
+        <table class="table mt-5 d-none" name="rates_table" id="rates_table">
             <thead>
             <th>Carrier</th>
             <th>Service</th>
